@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour, IEnemy
+public class Enemy1Manager : MonoBehaviour, IEnemy
 {
     public Vector3 enemyPosition { get ; set ; } 
     public int enemyDamage { get ; set; } 
@@ -8,17 +8,23 @@ public class EnemyMovement : MonoBehaviour, IEnemy
     public float enemyAttack { get ; set; }
     public bool enemyAlert { get ; set ; }
 
+    public GameObject floor; // surface where the npc will move
+    Collider floorCollider; //collider form the floor
 
+    void Awake()
+    {
+        floorCollider = floor.GetComponent<Collider>();
+    }
      // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetDamage(4500);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(enemyDamage);
+        
     }
 
     public void SetAlert(bool enemyAlert)
