@@ -361,6 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535f7955f43d9844bbc3367c53c5149e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  floor: {fileID: 1308781527}
+  agent: {fileID: 374725713}
 --- !u!1 &446833945
 GameObject:
   m_ObjectHideFlags: 0
