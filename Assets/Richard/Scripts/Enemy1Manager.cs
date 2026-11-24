@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy1Manager : MonoBehaviour, IEnemy
 {
@@ -11,6 +12,10 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     public GameObject floor; // surface where the npc will move
     Collider floorCollider; //collider form the floor
 
+    public NavMeshAgent agent;
+
+    private int divided = 2;
+
     void Awake()
     {
         floorCollider = floor.GetComponent<Collider>();
@@ -18,6 +23,9 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
      // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //test to check the npc movment
+        Vector3 myDestination = new Vector3(-floorCollider.bounds.size.x/divided,1,-floorCollider.bounds.size.z/divided);
+        agent.SetDestination(myDestination);
         
     }
 
