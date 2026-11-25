@@ -1,3 +1,4 @@
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,19 +14,21 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     Collider floorCollider; //collider form the floor
 
     public NavMeshAgent agent;
-
-    private int divided = 2;
+    private const int divided = 2;// Const to divide bounds
+    
 
     void Awake()
     {
         floorCollider = floor.GetComponent<Collider>();
+        
     }
      // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //test to check the npc movment
-        Vector3 myDestination = new Vector3(-floorCollider.bounds.size.x/divided,1,-floorCollider.bounds.size.z/divided);
-        agent.SetDestination(myDestination);
+        
+        SetEnemyMove(setRandomMove());
+        
         
     }
 
@@ -52,12 +55,23 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     public void SetEnemyMove(Vector3 enemyPosition)
     {
-       
+       agent.SetDestination(enemyPosition);
     }
 
     public void SetSpeed(float enemySpeed)
     {
         
+    }
+    //Function to set a random range Between bounds
+    private Vector3 setRandomMove()
+    {
+        //Initial variables to get surface limits
+        float x = floorCollider.bounds.size.x/divided;
+        float z = floorCollider.bounds.size.z/divided;
+        //Random variables to  move agent over the surface
+        float xPoint = Random.Range(-x,x);
+        float zPoint = Random.Range(-z,z);
+        return new Vector3(xPoint,1,zPoint);
     }
 
 
