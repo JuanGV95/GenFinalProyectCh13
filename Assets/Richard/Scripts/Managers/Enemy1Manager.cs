@@ -14,7 +14,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     public static Enemy1Manager instance; // Created and static instance reference for this class
 
-    public GameObject floor; // surface where the npc will move
+    //private GameObject floor; // surface where the npc will move
     Collider floorCollider; //collider form the floor
     private NavMeshAgent agent;// to add navmesh by coding
     private const int divided = 2;// Const to divide bounds
@@ -27,8 +27,10 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     void Awake()
     {
+        //It depends on floor name
+        floorCollider = GameObject.Find("Floor").GetComponent<Collider>();
         //gettin the collider form the floor
-        floorCollider = floor.GetComponent<Collider>();
+        //floorCollider = floor.GetComponent<Collider>();
         instance = this; // proving features to make all methods 
        
         

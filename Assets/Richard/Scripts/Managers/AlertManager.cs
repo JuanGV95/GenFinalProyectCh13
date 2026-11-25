@@ -26,7 +26,6 @@ public class AlertManager : MonoBehaviour
         playerPositon = player.transform.position;
         if (Vector3.Distance(playerPositon, watchingPointPosition) < radioDeAlerta)
         {
-            Debug.Log("Enemy is comming");
             Enemy1Manager.instance.SetAlert(true);
         }
     }
