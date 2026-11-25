@@ -7,7 +7,11 @@ public class AlertManager : MonoBehaviour
 
     private Vector3 playerPositon;// To know where the player is
     private Vector3 watchingPointPosition; //to know where the whacher is
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static AlertManager instance;
+    void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         //get watchingPoint Position
@@ -22,6 +26,12 @@ public class AlertManager : MonoBehaviour
         if (Vector3.Distance(playerPositon, watchingPointPosition) < 1f)
         {
             Debug.Log("Enemy is comming");
+            Enemy1Manager.instance.SetAlert(true);
         }
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return playerPositon;
     }
 }

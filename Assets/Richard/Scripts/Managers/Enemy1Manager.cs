@@ -10,6 +10,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     public float enemySpeed { get ; set ; }
     public float enemyAttack { get ; set; }
     public bool enemyAlert { get ; set ; }
+    public int enemyLife { get ; set ; }
 
     public static Enemy1Manager instance; // Created and static instance reference for this class
 
@@ -19,6 +20,8 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     private const int divided = 2;// Const to divide bounds
 
     private Vector3 finalPosition ; // Final position to check
+
+    private Coroutine coroutine; //test corrutine
     
     
 
@@ -35,6 +38,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
    {    //Created navMEshAgent by coding
         agent = gameObject.AddComponent<NavMeshAgent>();
         //test to check the npc movment   
+        SetAlert(false);
         StartCoroutine(WaitingForSurface());
     }
 
@@ -42,8 +46,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
-        PlayerArrived(); // To know when the player arrived
-        
+       EnemyState();
     }
 
 
@@ -55,7 +58,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     public void SetAttack(int enemyAttack)
     {
-       
+       this.enemyAttack = enemyAttack;
     }
 
     public void SetDamage(int enemyDamage)
@@ -72,6 +75,10 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     public void SetSpeed(float enemySpeed)
     {
         
+    }
+    public void SetLife(int enemyLife)
+    {
+        this.enemyLife = enemyLife;
     }
     //Function to set a random range Between bounds
     private Vector3 setRandomMove()
@@ -101,16 +108,39 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
         // to set first destination
         SetEnemyMove(finalPosition);
     }
+    
 
     //Function to determine if Enemy arrived to watch point
     public void PlayerArrived()
     {
         float distancia = Vector3.Distance(finalPosition,agent.transform.position);
-        //Debug.Log(distancia);
         if (!agent.pathPending && distancia < 2f && agent.velocity.sqrMagnitude < 0.01f)
         {
-            //Debug.Log("Agent Arrived");
-            StartCoroutine(WaitingEnemy());
+            coroutine = StartCoroutine(WaitingEnemy());
+        }
+    }
+
+     //Function to go to player
+    public void StartAttack()
+    {
+        //to bring player position and replace finaalposition value
+        finalPosition = AlertManager.instance.GetPlayerPosition();
+        //to modify new position
+        float distancia = Vector3.Distance(finalPosition,agent.transform.position);
+        SetEnemyMove(finalPosition);
+    }
+
+    private void EnemyState()
+    {   //to detect when to change
+        if (enemyAlert)
+        {
+            StopCoroutine(coroutine);
+            StartAttack();
+            //Debug.Log("La corrutna anterior se detuvo");
+        }
+        else
+        {
+            PlayerArrived(); // To know when the Enemy arrived
         }
     }
   

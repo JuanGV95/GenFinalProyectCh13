@@ -8,6 +8,7 @@ public interface IEnemy
     float enemySpeed {get; set;}
     float enemyAttack {get; set;}
     bool enemyAlert   {get; set;}
+    int enemyLife {get; set;}
 
     //methods
 
@@ -21,4 +22,5 @@ public interface IEnemy
     void SetAttack(int enemyAttack);
     //to set when the enemy needs to change its state
     void SetAlert(bool enemyAlert);
+    void SetLife(int enemyLife);
 }
