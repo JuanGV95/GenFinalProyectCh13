@@ -126,7 +126,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
         //to bring player position and replace finaalposition value
         finalPosition = AlertManager.instance.GetPlayerPosition();
         //to modify new position
-        float distancia = Vector3.Distance(finalPosition,agent.transform.position);
+        //float distancia = Vector3.Distance(finalPosition,agent.transform.position);
         SetEnemyMove(finalPosition);
     }
 
@@ -134,9 +134,9 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     {   //to detect when to change
         if (enemyAlert)
         {
-            StopCoroutine(coroutine);
+ 
             StartAttack();
-            //Debug.Log("La corrutna anterior se detuvo");
+          
         }
         else
         {

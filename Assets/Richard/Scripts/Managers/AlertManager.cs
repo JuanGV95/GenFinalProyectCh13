@@ -8,6 +8,7 @@ public class AlertManager : MonoBehaviour
     private Vector3 playerPositon;// To know where the player is
     private Vector3 watchingPointPosition; //to know where the whacher is
     public static AlertManager instance;
+    private int radioDeAlerta = 2;
     void Awake()
     {
         instance = this;
@@ -23,7 +24,7 @@ public class AlertManager : MonoBehaviour
     {
         //Get player position
         playerPositon = player.transform.position;
-        if (Vector3.Distance(playerPositon, watchingPointPosition) < 1f)
+        if (Vector3.Distance(playerPositon, watchingPointPosition) < radioDeAlerta)
         {
             Debug.Log("Enemy is comming");
             Enemy1Manager.instance.SetAlert(true);

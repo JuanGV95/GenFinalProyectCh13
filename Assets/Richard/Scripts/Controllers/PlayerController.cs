@@ -3,9 +3,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private InputSystem_Actions inputActions;
+    private Rigidbody rigidbody;
+    private Vector2 playerDirections;
     void Awake()
     {
         inputActions = new InputSystem_Actions();
+        rigidbody = gameObject.GetComponent<Rigidbody>();
     }
     void OnEnable()
     {
@@ -20,8 +23,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 playerDirections = inputActions.Player.Move.ReadValue<Vector2>();
-        transform.Translate(Vector3.forward*5*playerDirections.y*Time.deltaTime);
-        transform.Translate(Vector3.right*5*playerDirections.x*Time.deltaTime);
+        playerDirections = inputActions.Player.Move.ReadValue<Vector2>();
+        
+    }
+    void FixedUpdate()
+    {
+        rigidbody.AddForce(Vector3.forward*playerDirections.y,ForceMode.Impulse);
+        rigidbody.AddForce(Vector3.right*playerDirections.x,ForceMode.Impulse);
     }
 }
