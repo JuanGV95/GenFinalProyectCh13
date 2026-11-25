@@ -12,21 +12,22 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     public GameObject floor; // surface where the npc will move
     Collider floorCollider; //collider form the floor
-
-    public NavMeshAgent agent;
+    private NavMeshAgent agent;// to add navmesh by coding
     private const int divided = 2;// Const to divide bounds
     
 
     void Awake()
     {
+        //gettin the collider form the floor
         floorCollider = floor.GetComponent<Collider>();
         
     }
-     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
-    {
-        //test to check the npc movment
-        
+   {    //Created navMEshAgent by coding
+        agent = gameObject.AddComponent<NavMeshAgent>();
+        agent.radius = 5f;
+        //test to check the npc movment    
         SetEnemyMove(setRandomMove());
         
         
