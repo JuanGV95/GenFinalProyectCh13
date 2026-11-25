@@ -508,6 +508,7 @@ GameObject:
   - component: {fileID: 482007233}
   - component: {fileID: 482007232}
   - component: {fileID: 482007231}
+  - component: {fileID: 482007235}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -608,6 +609,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &482007235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482007230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ed0d2587b2c2c41a858df23f827a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!1 &674542233
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffa575b00a4daa43bc3897ce5b4b9dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlertManager
+  player: {fileID: 482007230}
+  watchingPoint: {fileID: 1980592021}
 --- !u!1 &796066555
 GameObject:
   m_ObjectHideFlags: 0

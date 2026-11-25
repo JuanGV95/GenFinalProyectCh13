@@ -50,7 +50,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     public void SetAlert(bool enemyAlert)
     {
-        
+        this.enemyAlert = enemyAlert;// to set Enemy alert by AlertManager Class
     }
 
     public void SetAttack(int enemyAttack)
