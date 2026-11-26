@@ -27,10 +27,9 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     void Awake()
     {
-        //It depends on floor name
+        //It depends on floor tag
         floorCollider = GameObject.FindGameObjectWithTag("Piso").GetComponent<Collider>();
-        //gettin the collider form the floor
-        //floorCollider = floor.GetComponent<Collider>();
+        
         instance = this; // proving features to make all methods 
        
         
