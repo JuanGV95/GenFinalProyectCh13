@@ -31,7 +31,8 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
         floorCollider = GameObject.FindGameObjectWithTag("Piso").GetComponent<Collider>();
         
         instance = this; // proving features to make all methods 
-       
+        SetLife(50);
+        SetAttack(10);
         
     }
 
