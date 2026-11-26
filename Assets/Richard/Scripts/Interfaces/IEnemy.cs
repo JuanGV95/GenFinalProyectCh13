@@ -6,7 +6,7 @@ public interface IEnemy
     Vector3 enemyPosition {get; set;}
     int enemyDamage {get; set;}
     float enemySpeed {get; set;}
-    float enemyAttack {get; set;}
+    int enemyAttack {get; set;}
     bool enemyAlert   {get; set;}
     int enemyLife {get; set;}
 

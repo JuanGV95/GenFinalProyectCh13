@@ -8,7 +8,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     public Vector3 enemyPosition { get ; set ; } 
     public int enemyDamage { get ; set; } 
     public float enemySpeed { get ; set ; }
-    public float enemyAttack { get ; set; }
+    public int enemyAttack { get ; set; }
     public bool enemyAlert { get ; set ; }
     public int enemyLife { get ; set ; }
 
@@ -22,17 +22,20 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     private Vector3 finalPosition ; // Final position to check
 
     private Coroutine coroutine; //test corrutine
-    
+
+    //This space is only for testing purposes
+   private Renderer renderer;
     
 
     void Awake()
     {
+        renderer = gameObject.GetComponent<Renderer>();
         //It depends on floor tag
         floorCollider = GameObject.FindGameObjectWithTag("Piso").GetComponent<Collider>();
         
         instance = this; // proving features to make all methods 
         SetLife(50);
-        SetAttack(10);
+        SetAttack(4);
         
     }
 
@@ -49,6 +52,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     void Update()
     {
        EnemyState();
+       RadioAttack();
     }
 
 
@@ -144,6 +148,28 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
         {
             PlayerArrived(); // To know when the Enemy arrived
         }
+    }
+
+    //method to detect radioAttack
+    private void RadioAttack()
+    {
+        float attackDistance = Vector3.Distance(agent.transform.position,AlertManager.instance.GetPlayerPosition());
+        StartCoroutine(ReduceEnemyLife());
+        if (attackDistance<2 && enemyAlert && PlayerDamage.instance.GetLife()>0)
+        {
+            PlayerDamage.instance.setDamage(enemyAttack);
+            renderer.material.color = Color.red;
+        }
+        else
+        {
+            //it is only for testing purpuses
+            renderer.material.color = Color.blue;
+        }
+    }
+
+    private IEnumerator ReduceEnemyLife()
+    {
+        yield return new WaitForSeconds(1);
     }
   
 
