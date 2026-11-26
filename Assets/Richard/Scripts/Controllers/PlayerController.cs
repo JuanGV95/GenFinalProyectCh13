@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     private InputSystem_Actions inputActions;
     private Rigidbody rigidbody;
     private Vector2 playerDirections;
+    
     void Awake()
     {
         inputActions = new InputSystem_Actions();
