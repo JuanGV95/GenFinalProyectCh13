@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HeroInputReader : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class HeroInputReader : MonoBehaviour
 
     public Vector2 LookInput => controls.Gameplay.Look.ReadValue<Vector2>();
 
+    public bool IsMouseLook => controls.Gameplay.Look.activeControl?.device is Mouse;
+
+    public bool WalkHeld => controls.Gameplay.Walk.IsPressed();
     public bool SprintHeld => controls.Gameplay.Sprint.IsPressed();
 
     public bool DefenseHeld => controls.Gameplay.Defense.IsPressed();

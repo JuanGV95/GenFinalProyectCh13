@@ -27,7 +27,9 @@ public class HeroController : MonoBehaviour
 
     private void Start()
     {
-        LocomotionMachine.ChangeState(new IdleState(Context));
+        motor.RefreshGround();
+
+        LocomotionMachine.ChangeState(motor.IsGrounded ? Context.LocomotionStates.Idle : Context.LocomotionStates.Fall);
         ActionsMachine.ChangeState(new NeutralActionState(Context));
     }
 
@@ -35,8 +37,7 @@ public class HeroController : MonoBehaviour
     {
         LocomotionMachine.Tick(Time.deltaTime);
         ActionsMachine.Tick(Time.deltaTime);
-
-        TestMovement();
+       
     }
 
     private void FixedUpdate()
@@ -49,22 +50,4 @@ public class HeroController : MonoBehaviour
         motor.FixedTick(Time.fixedDeltaTime);
     }
 
-    private void TestMovement()
-    {
-        Vector3 direction =
-            MovementUtility.GetCameraRelativeDirection(
-                input.MoveInput,
-                cameraTransform);
-
-        float speed = input.SprintHeld
-            ? motor.Data.sprintSpeed
-            : motor.Data.runSpeed;
-
-        motor.SetMovement(direction, speed);
-
-        motor.SetFacingDirection(cameraTransform.forward);
-
-        if (input.JumpPressed)
-            motor.TryJump();
-    }
 }

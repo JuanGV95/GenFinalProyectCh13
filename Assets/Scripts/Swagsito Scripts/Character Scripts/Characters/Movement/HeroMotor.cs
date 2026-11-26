@@ -16,6 +16,8 @@ public class HeroMotor : MonoBehaviour
     private Vector3 desiredFacing;
 
     private bool jumpRequested;
+    public bool IsJumpPending => jumpRequested;
+
     private bool motorEnabled = true;
 
     public MovementData Data => movementData;
@@ -26,7 +28,7 @@ public class HeroMotor : MonoBehaviour
 
     public float HorizontalSpeed => Vector3.ProjectOnPlane(Velocity, Vector3.up).magnitude;
 
-    public bool IsGrounded => groundDetector.IsGrounded && VerticalVelocity <= 0.5f;
+    public bool IsGrounded => groundDetector.IsGrounded && Vector3.Dot(Velocity.normalized, groundDetector.GroundNormal) < 0.5f;
 
     private void Awake()
     {

@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class IdleState : HeroState
+public class IdleState : GroundedState
 {
-    public IdleState(HeroContext context) : base (context, context.LocomotionMachine)
+    protected override float Speed => 0f;
+
+    public IdleState(HeroContext context)
+        : base(context)
     {
     }
 

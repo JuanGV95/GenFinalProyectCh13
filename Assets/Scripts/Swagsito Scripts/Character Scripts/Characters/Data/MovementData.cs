@@ -21,6 +21,9 @@ public class MovementData : ScriptableObject
     [Range(0f, 1f)]
     public float airControl = 0.6f;
 
+    [Header("Landing")]
+    [Min(0f)] public float landingDuration = 0.12f;
+
     [Header("Ground Detection")]
     [Min(0.01f)] public float groundCheckRadius = 0.25f;
     [Min(0.01f)] public float groundCheckDistance = 0.15f;

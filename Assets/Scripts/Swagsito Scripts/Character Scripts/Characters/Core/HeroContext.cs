@@ -4,6 +4,8 @@ public class HeroContext
 {
     public HeroController Hero { get; }
 
+    public LocomotionStates LocomotionStates { get; }
+
     public HeroInputReader Input { get; }
     public HeroMotor Motor { get; }
 
@@ -20,5 +22,6 @@ public class HeroContext
         CameraTransform = cameraTransform;
         LocomotionMachine = locomotionMachine;
         ActionsMachine = actionsMachine;
+        LocomotionStates = new LocomotionStates(this);
     }
 }
