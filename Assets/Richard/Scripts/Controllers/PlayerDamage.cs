@@ -17,7 +17,7 @@ public class PlayerDamage : MonoBehaviour
     public void setDamage(int damage)
     {
         playerLife = playerLife - damage;
-        if(playerLife < 1)
+        if(playerLife <=0 )
         {
             gameObject.SetActive(false);
         }

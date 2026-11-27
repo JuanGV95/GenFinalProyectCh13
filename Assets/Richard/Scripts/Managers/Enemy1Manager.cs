@@ -23,15 +23,12 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     private Coroutine coroutine; //test corrutine
 
-    //This space is only for testing purposes
-   private Renderer renderer;
 
-   private bool enemyLocalAlert = false;
     
 
     void Awake()
     {
-        renderer = gameObject.GetComponent<Renderer>();
+        
         //It depends on floor tag
         floorCollider = GameObject.FindGameObjectWithTag("Piso").GetComponent<Collider>();
         
@@ -54,7 +51,6 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     void Update()
     {
        EnemyState();
-       RadioAttack();
        DetectingZone();
     }
 
@@ -104,18 +100,14 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     private IEnumerator WaitingForSurface()
     {
         yield return new WaitUntil(() => agent.isOnNavMesh);
-        finalPosition = setRandomMove();
-        // to set first destination
-        SetEnemyMove(finalPosition);
+        SetFinalPosition(setRandomMove());
     }
 
     private IEnumerator WaitingEnemy()
     {
         yield return new WaitForSeconds(3f);
         //Created new random final point
-        finalPosition = setRandomMove();
-        // to set first destination
-        SetEnemyMove(finalPosition);
+        SetFinalPosition(setRandomMove());
     }
     
 
@@ -132,22 +124,18 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
      //Function to go to player
     public void StartAttack()
     {
-        //to bring player position and replace finaalposition value
-        finalPosition = GetPlayerPosition();
-        //to modify new position
-        SetEnemyMove(finalPosition);
+        SetFinalPosition(GetPlayerPosition());
     }
 
       public void DetectingZone()
     {
         //get postition
         float attackingDistance = GetDistance();
-        //enemyLocalAlert = true;
         //to modify new position
-        if (attackingDistance < 5f )//&& enemyLocalAlert)
+        if (attackingDistance < 5f )
         {
             StartAttack();    
-            StartCoroutine(ReduceEnemyLife());
+            StartCoroutine(ReduceEnemyLife(1));
             //the damage will only occure if the distan is fewer than 2 units
             if (attackingDistance<2f && PlayerDamage.instance.GetLife()>=0)
             {
@@ -156,7 +144,6 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
             }
             
         }
-
         
     }
 
@@ -165,36 +152,18 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     {   //to detect when to change
         if (enemyAlert)
         {
- 
             StartAttack();
-          
         }
         else
         {
             PlayerArrived(); // To know when the Enemy arrived
         }
     }
+   
 
-    //method to detect radioAttack
-    private void RadioAttack()
+    private IEnumerator ReduceEnemyLife(int mytime)//Fuctiont to wait for making damage to player
     {
-        float attackDistance = GetDistance();
-        StartCoroutine(ReduceEnemyLife());
-        if (attackDistance<2 && enemyAlert && PlayerDamage.instance.GetLife()>=0)
-        {
-            PlayerDamage.instance.setDamage(enemyAttack);
-            renderer.material.color = Color.red;
-        }
-        else
-        {
-            //it is only for testing purpuses
-            renderer.material.color = Color.blue;
-        }
-    }
-
-    private IEnumerator ReduceEnemyLife()//Fuctiont to wait for making damage to player
-    {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(mytime);
     }
 
     private Vector3 GetPlayerPosition()//Function to get the current player postion from AlertMAnager class
@@ -206,6 +175,13 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     private float GetDistance()//To get distance between player and enemies
     {
         return Vector3.Distance(GetPlayerPosition(),agent.transform.position);
+    }
+
+    private void  SetFinalPosition(Vector3 finalposition) //To set a Random final position
+    {
+        this.finalPosition = finalposition;
+        // to set first destination
+        SetEnemyMove(finalPosition);
     }
   
 
