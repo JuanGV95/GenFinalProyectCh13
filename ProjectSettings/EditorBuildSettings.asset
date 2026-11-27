@@ -6,8 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/EscenaSprint1/EscenaSprint1.unity
+    guid: 5b4c4fd6ad1d38d4492088e7ffc2f580
+  - enabled: 1
+    path: Assets/Scenes/UI/SeleccionMision.unity
+    guid: 569a1e4346e986e46a572fbdc71ab6df
+  - enabled: 1
+    path: Assets/Scenes/SrSwagsitoScenes/MainMenu.unity
+    guid: 2d08af317ca9cbd438968b006ef6b834
+  - enabled: 1
+    path: Assets/Scenes/UI/Victoria.unity
+    guid: a796560c1ad5a704a9d560f66616039c
+  - enabled: 1
+    path: Assets/Scenes/UI/Derrota.unity
+    guid: 4ff381b36f5db1e4094a11515c65097c
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
