@@ -1124,6 +1124,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3850470a5ea9cfb4baeceb2ca94a73b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamage
+--- !u!1 &1507490002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2881310793671305109, guid: 4d3551108cf27db418cb95051efe4bd0, type: 3}
+  m_PrefabInstance: {fileID: 1786389159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1507490006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507490002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abad9f85142ceb94f95f7461bad3d570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
 --- !u!1001 &1694248704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1263,7 +1280,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2881310793671305109, guid: 4d3551108cf27db418cb95051efe4bd0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1507490006}
   m_SourcePrefab: {fileID: 100100000, guid: 4d3551108cf27db418cb95051efe4bd0, type: 3}
 --- !u!1 &1980592021
 GameObject:

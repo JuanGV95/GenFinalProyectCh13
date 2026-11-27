@@ -124,8 +124,11 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
      //Function to go to player
     public void StartAttack()
     {
-        //test
-        Vector3 vector3 = new Vector3(1,0,Random.Range(-1f,1f));
+        //float variable to position enemy close to player and stop its movement
+        float [] offsetPostitionEnemy = {-1.5f,1.5f};
+        float postitionVariation = offsetPostitionEnemy[ Random.Range(0,2)];
+        Vector3 vector3 = new Vector3(postitionVariation,0,postitionVariation);
+        //adding or removing z and x position to postition enemy next to player
         SetFinalPosition(GetPlayerPosition()-vector3);
     }
 
@@ -138,12 +141,15 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
         {
             StartAttack();    
             StartCoroutine(ReduceEnemyLife(1));
+            //Test purposes
+            float currentEnemyLife = enemyLife;
             //the damage will only occure if the distan is fewer than 2 units
-            if (attackingDistance<2f && PlayerDamage.instance.GetLife()>=0)
+            if (attackingDistance<3f && PlayerDamage.instance.GetLife()>=0)
             {
-            
+                currentEnemyLife--;
+                //just to test how the lifebar goes down
                 PlayerDamage.instance.setDamage(enemyAttack);
-                
+                //HealthBar.instance.HealthBarFill(enemyLife,currentEnemyLife);
             }
             
         }
