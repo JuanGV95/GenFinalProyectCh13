@@ -3,14 +3,14 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-// H-EROE — Una opción del menú principal (va junto al Button de la opción).
+// Una opción del menú principal (va junto al Button de la opción).
 // El Button hace el Sprite Swap de la barra roja; este script anima lo que el
 // Sprite Swap no puede: el texto se corre y crece, y aparece la tecla ENTER.
 // Funciona igual con mouse, teclado y mando.
 [RequireComponent(typeof(Button))]
-public class OpcionMenuHEROE : MonoBehaviour, ISelectHandler, IPointerEnterHandler
+public class OpcionMenu : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {
-    [SerializeField] MenuPrincipalHEROE menu;
+    [SerializeField] MenuPrincipal menu;
     [SerializeField] RectTransform texto;
     [SerializeField] TextMeshProUGUI textoTMP;
     [SerializeField] GameObject teclaEnter;
@@ -35,7 +35,7 @@ public class OpcionMenuHEROE : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         descripcion = desc;
     }
 
-    public void AsignarMenu(MenuPrincipalHEROE m) => menu = m;
+    public void AsignarMenu(MenuPrincipal m) => menu = m;
 
     void Awake() => boton = GetComponent<Button>();
 
