@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 113500946812990601}
   - component: {fileID: 4938785409907763810}
+  - component: {fileID: 5791946653233731087}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -165,6 +166,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5791946653233731087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2881310793671305109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974ddfc16c6c60e4eb584c8fd42d5056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ManageSlidebars
 --- !u!1 &3885941885898655274
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df8e86716d586a24a8a3cb4e76d5b900, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.49999854
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df8e86716d586a24a8a3cb4e76d5b900, type: 3}
       propertyPath: m_LocalPosition.z

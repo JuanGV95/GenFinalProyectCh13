@@ -124,7 +124,9 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
      //Function to go to player
     public void StartAttack()
     {
-        SetFinalPosition(GetPlayerPosition());
+        //test
+        Vector3 vector3 = new Vector3(1,0,Random.Range(-1f,1f));
+        SetFinalPosition(GetPlayerPosition()-vector3);
     }
 
       public void DetectingZone()
@@ -139,6 +141,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
             //the damage will only occure if the distan is fewer than 2 units
             if (attackingDistance<2f && PlayerDamage.instance.GetLife()>=0)
             {
+            
                 PlayerDamage.instance.setDamage(enemyAttack);
                 
             }
