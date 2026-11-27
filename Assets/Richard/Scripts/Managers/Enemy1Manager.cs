@@ -25,6 +25,8 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     //This space is only for testing purposes
    private Renderer renderer;
+
+   private bool enemyLocalAlert = false;
     
 
     void Awake()
@@ -35,7 +37,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
         
         instance = this; // proving features to make all methods 
         SetLife(50);
-        SetAttack(4);
+        SetAttack(1);
         
     }
 
@@ -44,7 +46,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
         agent = gameObject.AddComponent<NavMeshAgent>();
         //test to check the npc movment   
         SetAlert(false);
-        StartCoroutine(WaitingForSurface());
+        StartCoroutine(WaitingForSurface());        
     }
 
 
@@ -53,6 +55,7 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     {
        EnemyState();
        RadioAttack();
+       DetectingZone();
     }
 
 
@@ -74,13 +77,13 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
 
     public void SetEnemyMove(Vector3 enemyPosition)
     {
-
+       //test
        agent.SetDestination(enemyPosition);
     }
 
     public void SetSpeed(float enemySpeed)
     {
-        
+        agent.speed = enemySpeed;
     }
     public void SetLife(int enemyLife)
     {
@@ -100,8 +103,8 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     //Funcition to wait until agent is on navmesh
     private IEnumerator WaitingForSurface()
     {
-         yield return new WaitUntil(() => agent.isOnNavMesh);
-         finalPosition = setRandomMove();
+        yield return new WaitUntil(() => agent.isOnNavMesh);
+        finalPosition = setRandomMove();
         // to set first destination
         SetEnemyMove(finalPosition);
     }
@@ -130,11 +133,33 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     public void StartAttack()
     {
         //to bring player position and replace finaalposition value
-        finalPosition = AlertManager.instance.GetPlayerPosition();
+        finalPosition = GetPlayerPosition();
         //to modify new position
-        //float distancia = Vector3.Distance(finalPosition,agent.transform.position);
         SetEnemyMove(finalPosition);
     }
+
+      public void DetectingZone()
+    {
+        //get postition
+        float attackingDistance = GetDistance();
+        //enemyLocalAlert = true;
+        //to modify new position
+        if (attackingDistance < 5f )//&& enemyLocalAlert)
+        {
+            StartAttack();    
+            StartCoroutine(ReduceEnemyLife());
+            //the damage will only occure if the distan is fewer than 2 units
+            if (attackingDistance<2f && PlayerDamage.instance.GetLife()>=0)
+            {
+                PlayerDamage.instance.setDamage(enemyAttack);
+                
+            }
+            
+        }
+
+        
+    }
+
 
     private void EnemyState()
     {   //to detect when to change
@@ -153,9 +178,9 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
     //method to detect radioAttack
     private void RadioAttack()
     {
-        float attackDistance = Vector3.Distance(agent.transform.position,AlertManager.instance.GetPlayerPosition());
+        float attackDistance = GetDistance();
         StartCoroutine(ReduceEnemyLife());
-        if (attackDistance<2 && enemyAlert && PlayerDamage.instance.GetLife()>0)
+        if (attackDistance<2 && enemyAlert && PlayerDamage.instance.GetLife()>=0)
         {
             PlayerDamage.instance.setDamage(enemyAttack);
             renderer.material.color = Color.red;
@@ -167,9 +192,20 @@ public class Enemy1Manager : MonoBehaviour, IEnemy
         }
     }
 
-    private IEnumerator ReduceEnemyLife()
+    private IEnumerator ReduceEnemyLife()//Fuctiont to wait for making damage to player
     {
         yield return new WaitForSeconds(1);
+    }
+
+    private Vector3 GetPlayerPosition()//Function to get the current player postion from AlertMAnager class
+    {
+        return AlertManager.instance.GetPlayerPosition(); 
+           
+    }
+
+    private float GetDistance()//To get distance between player and enemies
+    {
+        return Vector3.Distance(GetPlayerPosition(),agent.transform.position);
     }
   
 
